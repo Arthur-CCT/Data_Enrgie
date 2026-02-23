@@ -56,7 +56,7 @@ def plot_clusters(resultat):
     plt.xlabel('Consommation moyenne (W)')
     plt.ylabel('Écart-type / Variabilité (W)')
     plt.grid(True, linestyle='--', alpha=0.6)
-    plt.savefig('segmentation_residences.png')
+    plt.savefig('outputs/segmentation_residences.png')
     print("\nGraphique sauvegardé sous 'segmentation_residences.png'")
 
 
