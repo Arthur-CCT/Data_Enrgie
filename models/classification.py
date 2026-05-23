@@ -1,7 +1,7 @@
 """
 Classification Résidence Principale / Résidence Secondaire
 ==========================================================
-Pipeline :
+Pipeline complet :
   1. Extraction de features à partir des courbes de charge brutes
   2. Clustering k-means pour labelliser automatiquement RP vs RS
   3. Classification supervisée (régression logistique, MLP)
@@ -181,7 +181,7 @@ def clustering_kmeans(features, feature_cols, n_clusters=5, random_state=42):
     km = KMeans(n_clusters=n_clusters, n_init=30, random_state=random_state)
     clusters = km.fit_predict(X_scaled)
 
-    # Mapping automatique : les clusters à faible taux d'occupation - RS
+    # Mapping automatique : les clusters à faible taux d'occupation → RS
     # On utilise la feature "active_day_rate" comme proxy
     cluster_occ = pd.Series(
         features["active_day_rate"].values, index=range(len(features))
@@ -195,6 +195,52 @@ def clustering_kmeans(features, feature_cols, n_clusters=5, random_state=42):
     sil = silhouette_score(X_scaled, clusters)
 
     return labels, clusters, scaler, km, sil
+
+
+def analyse_choix_k(features, feature_cols, k_range=range(2, 16), random_state=42):
+    """Calcule l'inertie et le score silhouette pour différentes valeurs de k.
+
+    Sert à justifier le choix du nombre de clusters (méthode du coude
+    + maximum de silhouette).
+    """
+    X = features[feature_cols].values
+    scaler = StandardScaler()
+    X_scaled = scaler.fit_transform(X)
+
+    resultats = []
+    for k in k_range:
+        km = KMeans(n_clusters=k, n_init=20, random_state=random_state)
+        labels = km.fit_predict(X_scaled)
+        sil = silhouette_score(X_scaled, labels) if k > 1 else 0
+        resultats.append({"k": k, "inertie": km.inertia_, "silhouette": sil})
+
+    return pd.DataFrame(resultats)
+
+
+def exemples_courbes(df, features, labels, n_exemples=3):
+    """Extrait des courbes de charge représentatives pour RP et RS.
+
+    Sélectionne les PDL les plus typiques de chaque classe
+    (ceux dont le taux d'occupation est le plus éloigné du seuil).
+    """
+    features = features.copy()
+    features["label"] = labels
+
+    exemples = {}
+    for lab, nom in [(0, "RP"), (1, "RS")]:
+        sub = features[features["label"] == lab]
+        if nom == "RP":
+            top = sub.nlargest(n_exemples, "active_day_rate")
+        else:
+            top = sub.nsmallest(n_exemples, "active_day_rate")
+
+        courbes = {}
+        for pdl in top["pdl_id"].values:
+            data = df[df["pdl_id"] == pdl][["datetime", "p_w"]].sort_values("datetime")
+            courbes[pdl] = data
+        exemples[nom] = courbes
+
+    return exemples
 
 
 # ── Classification supervisée ──────────────────────────────────
