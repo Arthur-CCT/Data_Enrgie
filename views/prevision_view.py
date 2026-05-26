@@ -255,8 +255,7 @@ def render():
 
         st.markdown(
             "Le total de la semaine est bien mieux prédit que le détail jour "
-            "par jour : c'est attendu, c'est la quantité réellement prévisible "
-            "(et la plus utile pour la gestion de réseau)."
+            "par jour : c'est attendu, c'est la quantité réellement prévisible. "
         )
 
         st.markdown("---")
