@@ -34,7 +34,7 @@ JOURS = ["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"]
 
 # ── Cache ──────────────────────────────────────────────────────
 
-@st.cache_data(show_spinner="Entraînement du modèle en cours… (peut prendre 1-2 min)")
+@st.cache_data(show_spinner="Entraînement du modèle en cours… (peut prendre plusieurs minutes)")
 def lancer_pipeline(data_path, horizon, epochs, batch_size, lr):
     return pipeline_complet(
         csv_path=data_path,
@@ -197,10 +197,10 @@ def render():
         "Chemin du CSV", value="datas/courbes-de-charges-fictives-res2-6-9.csv"
     )
     horizon = st.sidebar.slider("Historique (semaines)", 2, 12, 8)
-    epochs = st.sidebar.slider("Epochs max", 20, 150, 80, step=10)
+    epochs = st.sidebar.slider("Epochs max", 20, 400, 300, step=10)
     lr = st.sidebar.select_slider(
         "Learning rate",
-        options=[1e-4, 2e-4, 5e-4, 1e-3, 2e-3],
+        options=[1e-4, 2e-4, 5e-4, 1e-3, 2e-3, 5e-3, 1e-2],
         value=5e-4, format_func=lambda x: f"{x:.0e}",
     )
 
@@ -299,7 +299,7 @@ def render():
                 f"  Entrée ({horizon} sem × 9 features)      Sortie\n"
                 f" ┌────────────────────────────────┐  ┌──────────┐\n"
                 f" │ 7 conso + sin(t) + cos(t)      │→ │ 7 jours  │\n"
-                f" │ par semaine, × {horizon} semaines      │  │ prédits  │\n"
+                f" │ par semaine, × {horizon} semaines     │  │ prédits  │\n"
                 f" └────────────────────────────────┘  └──────────┘\n"
                 "```"
             )
