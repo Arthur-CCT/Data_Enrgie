@@ -305,8 +305,8 @@ def render():
             )
             st.caption(
                 "sin(t) et cos(t) encodent la position dans l'année "
-                "(saisonnalité). Ainsi le modèle sait « on est en janvier » "
-                "même s'il ne voit que 8 semaines d'historique."
+                "(saisonnalité). Ainsi le modèle sait dans quel mois il se situe "
+                "même s'il ne voit qu'un nombre limité de semaines d'historique par exemple."
             )
 
         with col_stats:
@@ -315,7 +315,7 @@ def render():
             st.metric("Échantillons validation", f"{res['n_samples_val']:,}")
 
         st.markdown("---")
-        st.markdown("#### Pourquoi 8 semaines et pas 4 ? Et pourquoi pas 52 ?")
+        st.markdown("#### Choix de la fenêtre d'historique")
         st.markdown(
             f"Avec seulement 4 semaines d'historique, le modèle ne voyait "
             f"qu'un mois de recul : insuffisant pour capter les tendances "
