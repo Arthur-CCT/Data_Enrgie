@@ -474,6 +474,16 @@ def render():
             fig_comparaison_modeles(resultats), use_container_width=True,
         )
 
+        st.caption(
+            "**Accuracy** = proportion de PDL correctement classés (RP et RS confondus). "
+            "Trompeuse seule : un modèle qui dit toujours « RP » atteint déjà ~85 % "
+            "sur ce dataset déséquilibré.  \n"
+            "**F1 (RS)** = 2 × (précision × recall) / (précision + recall), calculé "
+            "sur la classe RS uniquement. La *précision* mesure la fiabilité des "
+            "prédictions RS, le *recall* mesure la capacité à retrouver les vraies RS. "
+            "Le F1 n'est élevé que si les deux le sont, c'est la métrique clé ici."
+        )
+
         # Matrices de confusion
         st.markdown("#### Matrices de confusion")
         cols = st.columns(len(resultats))
