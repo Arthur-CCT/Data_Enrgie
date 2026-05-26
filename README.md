@@ -36,7 +36,8 @@ Les données brutes (`courbes-de-charges-fictives-res2-6-9.csv`) et les labels d
 ```
 ├── app.py                   # Point d'entrée Streamlit (navigation)
 ├── models/                  # Modules ML
-│   └── classification.py    # Pipeline clustering + classifieurs
+│   ├── classification.py    # Pipeline clustering + classifieurs
+│   └── prevision.py         # Pipeline de prévision : agrégation + normalisation + fenêtrage  
 ├── views/                   # Pages du dashboard
 │   ├── classification_view.py
 │   ├── prevision_view.py
