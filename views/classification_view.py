@@ -302,8 +302,8 @@ def render():
     c1, c2, c3, c4 = st.columns(4)
     c1.metric("PDL analysés", f"{n_pdl}")
     c2.metric("Mesures", f"{len(df):,}")
-    c3.metric("Résidences principales", f"{n_rp}", f"{n_rp/n_pdl:.0%}")
-    c4.metric("Résidences secondaires", f"{n_rs}", f"{n_rs/n_pdl:.0%}")
+    c3.metric("Résidences principales", f"{n_rp} ({n_rp/n_pdl:.0%})")
+    c4.metric("Résidences secondaires", f"{n_rs} ({n_rs/n_pdl:.0%})")
 
     # ═══════════════════════════════════════════════════════
     # ONGLETS

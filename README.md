@@ -4,9 +4,9 @@ Projet réalisé dans le cadre de l'UE Data & Énergie. L'objectif est d'appliqu
 
 Le livrable est un dashboard Streamlit qui présente trois fonctionnalités :
 
-1. **Classification RP / RS** — identification des résidences principales et secondaires via clustering (k-means) puis classification supervisée (régression logistique, random forest, MLP)
-2. **Prévision** — prédiction de la courbe de charge à J+1 par CNN
-3. **Génération** — génération de courbes synthétiques conditionnées au type de résidence via auto-encodeur variationnel (VAE)
+1. **Classification RP / RS** : identification des résidences principales et secondaires via clustering (k-means) puis classification supervisée (régression logistique, random forest, MLP)
+2. **Prévision** : prédiction de la courbe de charge à J+1 par CNN
+3. **Génération** : génération de courbes synthétiques conditionnées au type de résidence via auto-encodeur variationnel (VAE)
 
 ## Installation
 
