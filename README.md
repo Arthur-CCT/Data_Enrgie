@@ -21,8 +21,6 @@ Génération de profils annuels synthétiques conditionnés au type de résidenc
 ## Installation
 
 ```bash
-git clone <url-du-repo>
-cd projet-data-energie
 pip install -r requirements.txt
 ```
 
@@ -34,7 +32,16 @@ Dépendances : pandas, numpy, scikit-learn, torch, plotly, streamlit.
 streamlit run app.py
 ```
 
-Les données brutes (`courbes-de-charges-fictives-res2-6-9.csv`) et les labels de référence (`RES2-6-9-labels.csv`) sont attendus dans le dossier `datas/`.
+## Données
+
+Les fichiers de données ne sont pas versionnés dans le dépôt (taille et confidentialité). Avant de lancer le dashboard, placer dans le dossier `datas/` les deux fichiers suivants, fournis séparément :
+
+```
+datas/courbes-de-charges-fictives-res2-6-9.csv   # courbes de charge
+datas/RES2-6-9-labels.csv                        # labels RP / RS
+```
+
+Les valeurs du CSV sont des puissances en watts au pas de 30 minutes. Les clients ont une puissance souscrite entre 6 et 9 kVA. Les labels de référence associent chaque identifiant client à un type de résidence (RP ou RS).
 
 ## Structure du projet
 
@@ -48,15 +55,11 @@ Les données brutes (`courbes-de-charges-fictives-res2-6-9.csv`) et les labels d
 │   ├── classification_view.py
 │   ├── prevision_view.py
 │   └── generation_view.py
-├── datas/                     # Données (non versionnées)
+├── datas/                     # Données
 └── README.md
 ```
 
 Chaque fonctionnalité est découplée : le module ML est dans `models/`, la page Streamlit correspondante dans `views/`.
-
-## Données
-
-Les valeurs du CSV sont des puissances en watts au pas de 30 minutes. Les clients ont une puissance souscrite entre 6 et 9 kVA. Les labels de référence associent chaque identifiant client à un type de résidence (RP ou RS).
 
 ## Auteurs
 
