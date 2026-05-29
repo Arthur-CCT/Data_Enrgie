@@ -34,7 +34,7 @@ streamlit run app.py
 
 ## Données
 
-Les fichiers de données ne sont pas versionnés dans le dépôt (taille et confidentialité). Avant de lancer le dashboard, placer dans le dossier `datas/` les deux fichiers suivants, fournis séparément :
+Les fichiers de données ne sont pas versionnés dans le dépôt (taille). Avant de lancer le dashboard, placer dans le dossier `datas/` les deux fichiers suivants, fournis séparément :
 
 ```
 datas/courbes-de-charges-fictives-res2-6-9.csv   # courbes de charge
