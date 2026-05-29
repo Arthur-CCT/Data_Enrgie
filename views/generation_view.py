@@ -89,6 +89,11 @@ def render():
     c1.metric("Foyers", f"{res['n_pdl']}")
     c2.metric("RP", f"{res['n_rp']}")
     c3.metric("RS", f"{res['n_rs']}")
+    st.caption(
+        "Le nombre de foyers peut différer de la page Classification : "
+        "la génération exige 52 semaines complètes par foyer (profil annuel) "
+        "et ne retient que ceux présents dans le fichier de labels."
+    )
 
     tab1, tab2, tab3 = st.tabs(["Approche", "Modèles", "Résultats"])
 
